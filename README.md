@@ -5,10 +5,5 @@
  
  You can find the dataset and html output of the work in the files. Your expertise in data science may come as a very bad work. 
  
- Because This is my first data study :)
+ Because This is my first work  :)
  
- 
- This is my work web page;
- 
-
- Link : https://mhmddpkts.github.io/Wife-Working-Hours-Data-Analysis-WebPage/
