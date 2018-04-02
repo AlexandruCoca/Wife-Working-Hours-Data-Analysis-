@@ -3,7 +3,6 @@ title: "ABD 'deki Kadın Çalısma Saatleri Veri Analizi"
 author: "Muhammed PEKTAS - Cevher SOYLEMEZ"
 ---
 
-#####Berk Orbay ve Mustafa Aydoğan'a teşekkür ederiz.
 <br>
 
 *Veriler 1995 yılında ABD'den toplanmistir.*
@@ -43,11 +42,12 @@ kod satırlarını kullanıyoruz..
 Kadinların ortalama calisma saatleri asagidaki kod yardimiyla yillik *1135.47* oldugunu goruyoruz.
 
 ```{r}
-ortalama_calisma_suresi <- mean(veriseti$hours)
+calisan_ortalama_calisma_suresi <- mean(calisan_kadinlar$hours)
+
 ```
 
 
-Calisan kadinlarin calismayan kadinlara orani; aşagidaki kod satirlari kullanılarak *2.7575* bulunmustur.
+Calisan kadinlarinortalama çalışma süresi *1542.21* olarak bulunmuştur.
 ```{r}
 calismayan_kadinlar <- veriseti %>% filter(veriseti$hours==0)
 calisan_kadinlar <- veriseti %>% filter(veriseti$hours!=0)
