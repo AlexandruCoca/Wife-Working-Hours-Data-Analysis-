@@ -1,5 +1,5 @@
 ---
-title: "ABD 'deki Kadın Çalısma Saatleri Veri Analizi"
+title: "ABD 'deki KadÃ„Â±n Ãƒâ€¡alÃ„Â±sma Saatleri Veri Analizi"
 author: "Muhammed PEKTAS - Cevher SOYLEMEZ"
 ---
 
@@ -42,7 +42,8 @@ kod satırlarını kullanıyoruz..
 Kadinların ortalama calisma saatleri asagidaki kod yardimiyla yillik *1135.47* oldugunu goruyoruz.
 
 ```{r}
-calisan_ortalama_calisma_suresi <- mean(calisan_kadinlar$hours)
+calisn_hours=calisan_kadinlar$hours
+calisan_ortalama_calisma_suresi <- mean(calisn_hours)
 
 ```
 
@@ -78,7 +79,7 @@ Aşağıdaki kod bloğunda ise kadınların eğitim durumlarına göre ortalama 
 eduHour <-veriseti %>% group_by(education) %>% 
   summarise_at(vars(hours),funs(mean))
 
-ggplot(eduHour,aes(x=education,y=hours))+geom_line(aes(colour="green"))
+ggplot(eduHour,aes(x=education,y=hours))+geom_line(aes(colour="green",size=0.1))
 ```
 
 >Bu grafikten kadınların 0-5 yıl eğitim alanlarının ortalama çalışma saatleri değişkenlik gösterse de bu eşikten sonra eğitim süresi arttıkça ortalama çalışma saatlerinin de arttığını görüyoruz.
@@ -88,6 +89,22 @@ ggplot(veriseti,aes(x=TotalChild,y=hours))+geom_point(aes(color='red'))
 ```
 
 >Toplam çoçuk sayıları arttıkça çalışan kadınların sayısının azalmasıyla beraber ortalama çalışma saatlerinin de azaldığı görülmektedir.
+
+
+###Nitelik Analizi
+
+
+<br>
+Aşağıda verisetimizdeki verilerin korelasyon matrisi çizdirilmiştir.
+<br>
+```{r warning=False}
+library("Hmisc")
+library(corrplot)
+
+corrMatrix=rcorr(as.matrix.data.frame(veriseti))
+corrplot(corrMatrix[["r"]], type = "upper", order = "hclust", 
+         tl.col = "black", tl.srt = 45)
+```
 
 
 ###Tahminsel Yaklaşımlar
@@ -111,7 +128,6 @@ Yukarıda çalışma saatinin tahminine yönelik karar ağacı modeli çizilmiş
 
 require(data.table)
 lineer_model = lm(hours~.,calisan_kadinlar)
-#plot(calisan_kadinlar$hours, lineer_model$fitted.values, xlab = "Gercek Deger", ylab = "Tahmini Deger")
 plot(lineer_model$fitted.values,lineer_model$residuals)
 ```
 
